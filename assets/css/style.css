@@ -106,8 +106,8 @@ h1,h2,h3,h4{font-weight:600;line-height:1.14;letter-spacing:-.015em}
 .brand{display:flex;align-items:center;gap:12px;flex-shrink:0}
 .brand-mark{width:42px;height:42px}
 .brand-name{display:flex;flex-direction:column;line-height:1.05}
-.brand-name b{font-size:20px;letter-spacing:.06em;color:var(--navy-900);font-weight:700}
-.brand-name span{font-size:10.5px;letter-spacing:.34em;color:var(--blue-600);font-weight:600;text-transform:uppercase}
+.brand-name b{font-size:20px;letter-spacing:.06em;color:#13375F;font-weight:700}
+.brand-name span{font-size:10.5px;letter-spacing:.34em;color:#808285;font-weight:600;text-transform:uppercase}
 
 .main-nav{display:flex;align-items:center;gap:4px}
 .main-nav>li{position:relative}
