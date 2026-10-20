@@ -107,10 +107,10 @@ ul{margin:0;padding:0;list-style:none}
 
 /* ---------- hero ---------- */
 .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;padding:140px 0 80px;overflow:hidden;background:var(--navy)}
-.hero .bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.5;filter:saturate(.7);transform:scale(1.04);animation:kb 18s ease-in-out infinite alternate}
+.hero .bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.9;transform:scale(1.04);animation:kb 18s ease-in-out infinite alternate}
 @keyframes kb{to{transform:scale(1.12) translateX(-1.5%)}}
-.hero .shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,29,51,.92) 0%,rgba(11,29,51,.6) 55%,rgba(11,29,51,.3) 100%)}
-.hero .slash{position:absolute;top:-10%;bottom:-10%;width:22vw;min-width:160px;background:var(--accent);transform:skewX(-18deg);opacity:.92;right:16vw;mix-blend-mode:normal}
+.hero .shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,29,51,.88) 0%,rgba(11,29,51,.55) 45%,rgba(11,29,51,.15) 100%)}
+.hero .slash{position:absolute;top:-10%;bottom:-10%;width:22vw;min-width:160px;background:var(--accent);transform:skewX(-18deg);opacity:.8;right:16vw;mix-blend-mode:normal}
 .hero .slash.two{width:6vw;min-width:40px;right:9vw;opacity:.55;background:var(--blue-light)}
 .hero .wrap{position:relative;z-index:2}
 .hero h1{font-size:clamp(34px,5.6vw,72px);font-weight:900;text-transform:uppercase;line-height:.98;max-width:980px;letter-spacing:-.01em}
@@ -151,9 +151,9 @@ ul{margin:0;padding:0;list-style:none}
 /* ---------- division cards ---------- */
 .div-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
 .div-card{position:relative;min-height:520px;display:flex;flex-direction:column;justify-content:flex-end;padding:40px;overflow:hidden;background:var(--navy);color:#fff;isolation:isolate}
-.div-card .bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.5;transition:transform .8s var(--ease),opacity .5s;z-index:-1}
-.div-card:hover .bg{transform:scale(1.06);opacity:.6}
-.div-card::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,29,51,0) 20%,rgba(11,29,51,.92) 100%);z-index:-1}
+.div-card .bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:1;transition:transform .8s var(--ease),opacity .5s;z-index:-1}
+.div-card:hover .bg{transform:scale(1.06)}
+.div-card::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,29,51,.05) 0%,rgba(11,29,51,.35) 40%,rgba(11,29,51,.95) 100%);z-index:-1}
 .div-card .bar{position:absolute;left:0;top:0;width:8px;height:100%;background:var(--accent)}
 .div-card h3{font-size:clamp(26px,2.6vw,36px);font-weight:800;margin-bottom:14px}
 .div-card p{color:var(--fg-80);max-width:520px}
@@ -237,9 +237,9 @@ ul{margin:0;padding:0;list-style:none}
 
 /* ---------- story / CTA banner ---------- */
 .story{position:relative;min-height:560px;display:flex;align-items:center;overflow:hidden;background:var(--navy)}
-.story .bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.35;filter:saturate(.6)}
-.story::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,29,51,.85),rgba(11,29,51,.35))}
-.story .frame{position:relative;z-index:2;max-width:760px;border:1px solid var(--fg-30);padding:clamp(30px,5vw,64px);margin:60px 0;background:rgba(11,29,51,.35);backdrop-filter:blur(2px)}
+.story .bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.75}
+.story::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,29,51,.7),rgba(11,29,51,.25))}
+.story .frame{position:relative;z-index:2;max-width:760px;border:1px solid var(--fg-30);padding:clamp(30px,5vw,64px);margin:60px 0;background:rgba(11,29,51,.6);backdrop-filter:blur(3px)}
 .story h2{font-size:clamp(32px,4.5vw,60px);font-weight:700;margin-bottom:16px}
 .story p{color:var(--fg-80);font-size:18px;max-width:600px}
 .story .cta{display:flex;flex-wrap:wrap;gap:16px;margin-top:28px}
