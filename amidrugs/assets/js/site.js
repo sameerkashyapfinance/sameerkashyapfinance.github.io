@@ -135,45 +135,33 @@
 
   /* Product catalogue */
   var cat = d.getElementById("catalogue");
-  if (cat && window.AMI_PRODUCTS) {
-    var P = window.AMI_PRODUCTS, A = window.AMI_AREAS, names = {};
-    A.forEach(function (a) { names[a.id] = a.name; });
-    var list = cat.querySelector(".plist"), qIn = cat.querySelector("#q"), chips = cat.querySelector("#area-chips"), az = cat.querySelector(".az"), count = cat.querySelector("#count"), reset = cat.querySelector("#reset");
-    var ps = new URLSearchParams(location.search);
-    var st = { q: ps.get("q") || "", area: ps.get("area") || "", letter: "" };
+  /* The list is plain HTML (works without JavaScript); this only adds search and A-Z filtering. */
+  var list = cat && cat.querySelector(".plist");
+  if (list) {
+    var items = [].slice.call(list.querySelectorAll("li[data-n]")), empty = list.querySelector(".empty");
+    var qIn = cat.querySelector("#q"), az = cat.querySelector(".az"), count = cat.querySelector("#count"), reset = cat.querySelector("#reset");
+    var st = { q: new URLSearchParams(location.search).get("q") || "", letter: "" };
     qIn.value = st.q;
-    function chip(id, label, n) {
-      var b = d.createElement("button"); b.type = "button"; b.className = "chip"; b.dataset.area = id;
-      b.innerHTML = label + " <span class='n'>" + n + "</span>";
-      b.addEventListener("click", function () { st.area = st.area === id ? "" : id; render(); });
-      return b;
-    }
-    chips.appendChild(chip("", "All", P.length));
-    A.forEach(function (a) { chips.appendChild(chip(a.id, a.name, P.filter(function (p) { return p.a === a.id; }).length)); });
     "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").forEach(function (L) {
-      var b = d.createElement("button"); b.type = "button"; b.textContent = L; b.setAttribute("aria-label", "Molecules starting with " + L);
-      if (!P.some(function (p) { return p.n.charAt(0).toUpperCase() === L; })) b.disabled = true;
+      var b = d.createElement("button"); b.type = "button"; b.textContent = L; b.setAttribute("aria-label", "Products starting with " + L);
+      if (!items.some(function (li) { return li.getAttribute("data-n").charAt(0).toUpperCase() === L; })) b.disabled = true;
       b.addEventListener("click", function () { st.letter = st.letter === L ? "" : L; render(); });
       az.appendChild(b);
     });
     qIn.addEventListener("input", function () { st.q = qIn.value; render(); });
     cat.querySelector("form").addEventListener("submit", function (e) { e.preventDefault(); });
-    reset.addEventListener("click", function () { st = { q: "", area: "", letter: "" }; qIn.value = ""; render(); });
-    function esc(s) { return s.replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
-    var arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+    reset.addEventListener("click", function () { st = { q: "", letter: "" }; qIn.value = ""; render(); });
     function render() {
-      var q = st.q.trim().toLowerCase();
-      var rows = P.filter(function (p) {
-        return (!st.area || p.a === st.area) && (!st.letter || p.n.charAt(0).toUpperCase() === st.letter) && (!q || p.n.toLowerCase().indexOf(q) > -1 || names[p.a].toLowerCase().indexOf(q) > -1);
+      var q = st.q.trim().toLowerCase(), shown = 0;
+      items.forEach(function (li) {
+        var n = li.getAttribute("data-n"), ok = (!st.letter || n.charAt(0).toUpperCase() === st.letter) && (!q || n.toLowerCase().indexOf(q) > -1);
+        li.hidden = !ok; if (ok) shown++;
       });
-      chips.querySelectorAll(".chip").forEach(function (c) { c.setAttribute("aria-pressed", c.dataset.area === st.area ? "true" : "false"); });
+      if (empty) empty.hidden = shown > 0;
       az.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", b.textContent === st.letter ? "true" : "false"); });
-      count.textContent = rows.length + (rows.length === 1 ? " molecule" : " molecules");
-      reset.style.visibility = (st.q || st.area || st.letter) ? "visible" : "hidden";
-      list.innerHTML = rows.length ? rows.map(function (p) {
-        return "<li><span class='nm'>" + esc(p.n) + "</span><span class='ar'>" + esc(names[p.a]) + "</span><a class='enq' href='contact.html?topic=supply&amp;api=" + encodeURIComponent(p.n) + "#enquiry'>Enquire " + arrow + "</a></li>";
-      }).join("") : "<li class='empty'>No molecule matches that search. <a href='contact.html?topic=supply#enquiry'>Ask our team</a> about it directly.</li>";
-      try { var u = new URL(location.href); ["q", "area"].forEach(function (k) { if (st[k]) u.searchParams.set(k, st[k]); else u.searchParams.delete(k); }); history.replaceState(null, "", u.pathname + u.search + u.hash); } catch (e) {}
+      count.textContent = shown + (shown === 1 ? " product" : " products");
+      reset.style.visibility = (st.q || st.letter) ? "visible" : "hidden";
+      try { var u = new URL(location.href); if (st.q) u.searchParams.set("q", st.q); else u.searchParams.delete("q"); history.replaceState(null, "", u.pathname + u.search + u.hash); } catch (e) {}
     }
     render();
   }
