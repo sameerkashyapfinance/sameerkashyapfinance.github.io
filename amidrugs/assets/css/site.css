@@ -449,3 +449,15 @@ body.menu-open{overflow:hidden}
 .band .circle.person img{object-position:50% 22%}
 .band blockquote{margin:0 0 14px;font-size:clamp(20px,1.9vw,26px);line-height:1.4;color:#fff;font-weight:500}
 .band cite{display:block;font-style:normal;color:#E4F1E9;font-size:16px;margin-bottom:24px}.band cite b{display:block;color:#fff;font-size:18px}
+
+/* Investor Corner */
+.dtable{width:100%;border-collapse:collapse;background:#fff;border-radius:var(--r-lg);box-shadow:0 2px 18px rgba(11,15,13,.08);overflow:hidden;margin-bottom:22px}
+.dtable th{text-align:left;font-size:15px;font-weight:600;color:var(--muted);padding:16px 24px;border-bottom:1px solid var(--line)}
+.dtable td{padding:20px 24px;border-bottom:1px solid var(--line);font-size:18px}
+.dtable tr:last-child td{border-bottom:0}
+.dtable td:first-child{font-weight:600;color:var(--brand);white-space:nowrap}
+.dtable td:last-child{text-align:right}
+.dtable .dl{display:inline-flex;gap:8px;align-items:center;font-weight:600;color:var(--brand);text-decoration:none}
+.dtable .dl svg{width:18px;height:18px}
+.dtable .dl:hover{color:var(--accent-text);text-decoration:underline}
+@media (max-width:640px){.dtable th,.dtable td{padding:14px 14px;font-size:16px}.dtable th:nth-child(2),.dtable td:nth-child(2){display:none}}
